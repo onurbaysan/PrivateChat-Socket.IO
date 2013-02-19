@@ -21,6 +21,9 @@ Used Libraries
 You can get more information about used libraries through the links above.
 
 node.js = http://nodejs.org/
+
 socket.io = http://socket.io/
+
 bootstrap = http://twitter.github.com/bootstrap/
-jQuery = http://jquery.com/
+
+jQuery = http://jquery.com/ 
