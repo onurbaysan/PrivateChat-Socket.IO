@@ -3,6 +3,8 @@ PrivateChat-Socket.IO
 
 It was implemented using Node.js and Socket.io. Also twitter bootstrap for interface and jQuery were used.
 
+Homepage: [http://stall10n.github.com/PrivateChat-Socket.IO](http://stall10n.github.com/PrivateChat-Socket.IO)
+
 
 Features
 ========
@@ -20,10 +22,7 @@ Used Libraries
 
 You can get more information about used libraries through the links above.
 
-node.js = http://nodejs.org/
-
-socket.io = http://socket.io/
-
-bootstrap = http://twitter.github.com/bootstrap/
-
-jQuery = http://jquery.com/ 
+* [node.js](http://nodejs.org/)
+* [socket.io](http://socket.io/)
+* [Bootstrap](http://twitter.github.com/bootstrap/)
+* [jQuery](http://jquery.com/)
