@@ -1,6 +1,5 @@
 var http = require('http'),
     fs = require('fs'),
-    // NEVER use a Sync function except at start-up!
     index = fs.readFileSync(__dirname + '/index.html');
 
 // Send index.html to all requests
@@ -59,10 +58,8 @@ io.sockets.on('connection', function(socket) {
         io.sockets.emit("refreshUsers", users);
     });	
 	
-	// Client tarafýndan mesaj yollama fonksiyonu
-    socket.on("sendMessage", function(nickname, data){
-        // Baðlý kullanýcýlara kullanýcýdan gelen mesajý yolluyoruz
-        //io.sockets.emit("sendMessage", nickname, data);
+	
+    socket.on("sendMessage", function(nickname, data){        
 		socket.broadcast.emit("sendMessage", nickname, data);
     });
 	
