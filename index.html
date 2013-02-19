@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Private Chat</title>
+		<link href="public/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<script src="public/js/bootstrap.min.js"></script>
+		<script src="public/js/base.js"></script>			
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>	
+		<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script> 					
+		<script src='http://localhost:3000/socket.io/socket.io.js'></script>
+		<script>
+			$(function () {
+				$('#General').tab('show');
+								
+				$('#userlist').on('click', 'a' , function() {		
+					var val = $(this).attr("id");
+					user = val.substring(0,val.indexOf('-anc'));
+					
+					if(parseInt($('#' + user + '-span').text()) != 0) {						
+						socket.emit('updateStatus', { msg: "[[[SEEN]]]"  , to: user , from: document.title });	
+					}
+					$('#' + user + '-span').text(0);
+					$('#' + user + '-span').hide();						
+				});							
+				
+				$("#sendButton").on("click", function() {					
+					message();
+				});
+				
+				var last_time_press = null;
+				
+								
+				$('#textMessage').keypress(function(e) {
+					if(e.which == 13) {
+						e.preventDefault();
+						message();
+					} 					
+				});						
+				
+				var inputTimer;
+				var inputTimer_keydown;
+				
+				$('#textMessage').keydown(function() {
+					clearTimeout(inputTimer_keydown);
+					inputTimer_keydown = setTimeout(keyDown2, 200); //fires after 200 milisecond				
+				});
+				
+				function keyDown2()
+				{
+					if($('#textMessage').val().length > 1) {
+						updateStat(document.title + " is typing...");
+					}				
+				}
+				
+				$('#textMessage').keyup(function() {
+					clearTimeout(inputTimer);
+					inputTimer = setTimeout(emptyFill, 1000); //fires after 1 second
+				});
+				
+				function emptyFill() {
+					updateStat("");				
+				}				
+			});
+		</script>
+	</head>
+	<body>
+		<div class="container" id="loginScreen">
+			<legend>Login</legend>
+			<label>Nickname</label>
+			<input type="text" placeholder="Enter a nickname…" id="nickname">		
+			<div class="control-group">
+				<div class="controls">      
+				  <input type="submit" class="btn" onclick='test()' value='Login'>
+				</div>
+			</div>
+		</div>
+		<div class="container" id="chatScreen" style="display: none">		
+			<div class="tabbable tabs-left">
+			  <ul class="nav nav-tabs" id="userlist">	
+					<li class="active" id="firstone"><a href="#general" data-toggle="tab" id="General-anc">General<span class="badge badge-important" id="General-span" style="display: none">0</span></a></li>							
+			  </ul>
+			  <div class="tab-content" id="tabcontent">
+					<div id="general" class="tab-pane active">
+					  <h4>Messages</h4>
+					  <span class="label label-info" id="General-status"></span>
+					</div>						
+			  </div>
+			</div>
+			<textarea rows="4" id="textMessage"></textarea>
+			<input class="btn" type="submit" value="Send Message" id="sendButton"'>
+		</div>
+	</body>
+</html>
