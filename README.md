@@ -26,3 +26,10 @@ You can get more information about used libraries through the links above.
 * [socket.io](http://socket.io/)
 * [Bootstrap](http://twitter.github.com/bootstrap/)
 * [jQuery](http://jquery.com/)
+
+TODOS
+=====
+
+* Prettify the client interface
+* Twitter & Facebook login
+* Message storing on server side
