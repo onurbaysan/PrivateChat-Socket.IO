@@ -34,3 +34,4 @@ TODOS
 * Make the client interface suitable for mobile devices
 * Twitter & Facebook login
 * Message storing on server side
+* Host a demo on web
