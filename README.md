@@ -31,5 +31,6 @@ TODOS
 =====
 
 * Prettify the client interface
+* Make the client interface suitable for mobile devices
 * Twitter & Facebook login
 * Message storing on server side
