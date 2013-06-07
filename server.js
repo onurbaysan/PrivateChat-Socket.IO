@@ -1,11 +1,46 @@
 var http = require('http'),
     fs = require('fs'),
-    index = fs.readFileSync(__dirname + '/index.html');
+	path = require('path');
+    //index = fs.readFileSync(__dirname + '/index.html');
 
 // Send index.html to all requests
 var app = http.createServer(function(req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end(index);
+	var filePath = '.' + req.url;
+	if (filePath == './')
+		filePath = './index.html';
+		
+	var extname = path.extname(filePath);
+	var contentType = 'text/html';
+	switch (extname) {
+		case '.js':
+			contentType = 'text/javascript';
+			break;
+		case '.css':
+			contentType = 'text/css';
+			break;
+	}
+	
+	path.exists(filePath, function(exists) {
+	
+		if (exists) {
+			fs.readFile(filePath, function(error, content) {
+				if (error) {
+					res.writeHead(500);
+					res.end();
+				}
+				else {
+					res.writeHead(200, { 'Content-Type': contentType });
+					res.end(content, 'utf-8');
+				}
+			});
+		}
+		else {
+			res.writeHead(404);
+			res.end();
+		}
+	});
+    //res.writeHead(200, {'Content-Type': 'text/html'});
+    //res.end(index);
 });
 
 
@@ -15,7 +50,7 @@ var io = require('socket.io').listen(app);
 
 io.enable('browser client minification');  // send minified client
 io.enable('browser client etag');          // apply etag caching logic based on version number
-io.enable('browser client gzip');          // gzip the file
+//io.enable('browser client gzip');          // gzip the file
 
 app.listen(3000);
 
