@@ -3,6 +3,7 @@ var http = require('http'),
 	path = require('path');
     //index = fs.readFileSync(__dirname + '/index.html');
 
+
 // Send index.html to all requests
 var app = http.createServer(function(req, res) {
 	var filePath = '.' + req.url;
@@ -52,7 +53,7 @@ io.enable('browser client minification');  // send minified client
 io.enable('browser client etag');          // apply etag caching logic based on version number
 //io.enable('browser client gzip');          // gzip the file
 
-app.listen(3000);
+app.listen(process.env.PORT || 1337);
 
 // Connected user list
 var users = {};
