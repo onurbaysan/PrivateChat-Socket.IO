@@ -1,15 +1,13 @@
 var http = require('http'),
     fs = require('fs'),
-	path = require('path');
-    //index = fs.readFileSync(__dirname + '/index.html');
+	path = require('path'),
+	sio = require('socket.io');  
 
-
-// Send index.html to all requests
 var app = http.createServer(function(req, res) {
 	var filePath = '.' + req.url;
 	if (filePath == './')
 		filePath = './index.html';
-		
+	
 	var extname = path.extname(filePath);
 	var contentType = 'text/html';
 	switch (extname) {
@@ -39,21 +37,18 @@ var app = http.createServer(function(req, res) {
 			res.writeHead(404);
 			res.end();
 		}
-	});
-    //res.writeHead(200, {'Content-Type': 'text/html'});
-    //res.end(index);
+	});	
 });
 
 
+app.listen(process.env.PORT, function () {
+  var addr = app.address();
+  console.log('app listening on http://' + addr.address + ':' + addr.port);
+});
+
 // Socket.io server listens to our app
-var io = require('socket.io').listen(app);
+var io = sio.listen(app);
 
-
-io.enable('browser client minification');  // send minified client
-io.enable('browser client etag');          // apply etag caching logic based on version number
-//io.enable('browser client gzip');          // gzip the file
-
-app.listen(process.env.PORT || 1337);
 
 // Connected user list
 var users = {};
@@ -61,7 +56,8 @@ var users = {};
 var sockets = {};
 
 // Emit welcome message on connection
-io.sockets.on('connection', function(socket) {	
+io.sockets.on('connection', function(socket) {
+	console.log("geldi3");	
 	socket.on("newUser" , function(username) {
 		socket.username = username;		
 		socket.userId = users.length;
@@ -112,4 +108,4 @@ io.sockets.on('connection', function(socket) {
 			sockets[data.to].emit("updateStatus", data.from, data.msg);	
 		}
 	});
-});
+}); 

@@ -3,7 +3,7 @@ var nck;
 
 function clientSocket(nickname) {
 	
-	socket = io.connect('http://localhost:3000');
+	socket = io.connect(document.location.href);
 		
 	socket.on("connect", function() {
 		socket.emit("newUser", nickname);
