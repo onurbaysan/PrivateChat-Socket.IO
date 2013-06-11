@@ -5,7 +5,7 @@ It was implemented using Node.js and Socket.io. Also twitter bootstrap for inter
 
 Homepage: [http://stall10n.github.com/PrivateChat-Socket.IO](http://stall10n.github.com/PrivateChat-Socket.IO)
 
-
+Demo: http://nodechattr.eu01.aws.af.cm/
 Features
 ========
 
