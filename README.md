@@ -5,7 +5,8 @@ It was implemented using Node.js and Socket.io. Also twitter bootstrap for inter
 
 Homepage: [http://stall10n.github.com/PrivateChat-Socket.IO](http://stall10n.github.com/PrivateChat-Socket.IO)
 
-Demo: http://nodechattr.eu01.aws.af.cm/
+Demo: http://nodechattr.jit.su/
+
 Features
 ========
 
@@ -34,4 +35,4 @@ TODOS
 * Make the client interface suitable for mobile devices
 * Twitter & Facebook login
 * Message storing on server side
-* ~~Host a demo on web~~ (It's better to speed up first opening of the app or host app on another platform)
+* ~~Host a demo on web~~
